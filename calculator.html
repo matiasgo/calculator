@@ -8,25 +8,25 @@
 			<div id='display'>0</div>
 			<div id='working'>0</div>
 			<div id='container'>
+				<div class="operators" id="clear">CE</div>
 				<div class="operators" id="negate"><sup>+</sup>/-</div>
-				<div class="operators" id="sqrt">&#8730</div>
 				<div class="operators" id="squared">x<sup>2</sup></div>
-				<div class="operators" id="delete">&#9003</div>
-				<div class="buttons" id="7">7</div>
-				<div class="buttons" id="8">8</div>
-				<div class="buttons" id="9">9</div>
+				<div class="operators" id="del">&#9003</div>
+				<div class="buttons" id="seven">7</div>
+				<div class="buttons" id="eight">8</div>
+				<div class="buttons" id="nine">9</div>
 				<div class="operators" id="divide">&#247</div>
-				<div class="buttons" id='4'>4</div>
-				<div class="buttons" id="5">5</div>
-				<div class="buttons" id="6">6</div>
+				<div class="buttons" id='four'>4</div>
+				<div class="buttons" id="five">5</div>
+				<div class="buttons" id="six">6</div>
 				<div class="operators" id="times">x</div>
-				<div class="buttons" id='1'>4</div>
-				<div class="buttons" id="2">5</div>
-				<div class="buttons" id="3">6</div>
+				<div class="buttons" id='one'>1</div>
+				<div class="buttons" id="two">2</div>
+				<div class="buttons" id="three">3</div>
 				<div class="operators" id="minus">-</div>
-				<div class="buttons" id="0">0</div>
+				<div class="buttons" id="zero">0</div>
 				<div class="buttons" id="decimal">.</div>
-				<div class="operators" id="%">%</div>
+				<div class="operators" id="percent">%</div>
 				<div class="operators" id="plus">+</div>
 				<div class="operators" id="open">(</div>
 				<div class="operators" id="close">)</div>
@@ -34,5 +34,153 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript"></script>
+	<script type="text/javascript">
+	//selecting all number input buttons
+		var buttons = document.getElementsByClassName('buttons')
+	//selecting all operator buttons
+		var operators = document.getElementsByClassName('operators')
+	//selecting the display
+		var display = document.querySelector('#display')
+	//selecting the working display
+		var working_display = document.querySelector('#working')
+	//selecting operators	
+		var negate = document.querySelector('#negate')
+		var sqrt = document.querySelector('#sqrt')
+		var squared = document.querySelector('#squared')
+		var del = document.querySelector('#del')
+		var divide = document.querySelector('#divide')
+		var times = document.querySelector('#times')
+		var minus = document.querySelector('#minus')
+		var plus = document.querySelector('#plus')
+		var percent = document.querySelector('#percent')
+		var open = document.querySelector('#open')
+		var close = document.querySelector('#close')
+		var equals = document.querySelector('#equals')
+
+	//selecting number inpurs
+		var one = document.querySelector('#one')
+		var two = document.querySelector('#two')
+		var three = document.querySelector('#three')
+		var four = document.querySelector('#four')
+		var five = document.querySelector('#five')
+		var six = document.querySelector('#six')
+		var seven = document.querySelector('#seven')
+		var eight = document.querySelector('#eight')
+		var nine = document.querySelector('#nine')
+		var zero = document.querySelector('#zero')
+		var decimal = document.querySelector('#decimal')
+
+	//pushing the inputs to the working array
+		one.onclick = function() {
+			working.push(1)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		two.onclick = function() {
+			working.push(2)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		three.onclick = function() {
+			working.push(3)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		four.onclick = function() {
+			working.push(4)			
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		five.onclick = function() {
+			working.push(5)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		six.onclick = function() {
+			working.push(6)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		seven.onclick = function() {
+			working.push(7)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		eight.onclick = function() {
+			working.push(8)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		nine.onclick = function() {
+			working.push(9)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		zero.onclick = function() {
+			working.push(0)
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+
+	//pushing the operator inputs into the working array
+		clear.onclick = function() {
+			working = []
+			display.innerHTML = 0
+			working_display.innerHTML = 0
+			console.log(working)
+		}
+		negate.onclick = function() {
+			var operator_locations = [working.lastIndexOf(' + '), working.lastIndexOf(' - '), working.lastIndexOf(' / '), working.lastIndexOf(' * '), working.lastIndexOf(' ( '), working.lastIndexOf(' ) ')]
+			operator_locations.sort(function(a, b){return b-a})
+			working.splice(operator_locations[0]+1,0,'-')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		squared.onclick = function() {}
+		del.onclick = function() {
+			working.pop()
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		divide.onclick = function() {
+			working.push(' / ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		times.onclick = function() {
+			working.push(' * ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		minus.onclick = function() {
+			working.push(' - ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		plus.onclick = function() {
+			working.push(' + ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		percent.onclick = function() {}
+		open.onclick = function() {
+			working.push(' ( ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		close.onclick = function() {
+			working.push(' ) ')
+			working_display.innerHTML = working.join('')
+			console.log(working)
+		}
+		equals.onclick = function() {
+			working_display.innerHTML = working.join('')
+			working_display.innerHTML = working.join('')
+			var output = eval(working.join(''))
+			display.innerHTML = output
+		}
+
+		var working = []
+
+	</script>
 </html>
