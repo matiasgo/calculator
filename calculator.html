@@ -69,57 +69,96 @@
 		var nine = document.querySelector('#nine')
 		var zero = document.querySelector('#zero')
 		var decimal = document.querySelector('#decimal')
-
+	//last button pushed
+		var last_button;
 	//pushing the inputs to the working array
 		one.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(1)
+			last_button = 'one'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		two.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(2)
+			last_button = 'two'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		three.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(3)
+			last_button = 'three'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		four.onclick = function() {
-			working.push(4)			
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
+			working.push(4)
+			last_button = 'four'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		five.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(5)
+			last_button = 'five'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		six.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(6)
+			last_button = 'six'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		seven.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(7)
+			last_button = 'seven'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		eight.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(8)
+			last_button = 'eight'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		nine.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(9)
+			last_button = 'nine'
 			working_display.innerHTML = working.join('')
-			console.log(working)
 		}
 		zero.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
 			working.push(0)
+			last_button = 'zero'
 			working_display.innerHTML = working.join('')
-			console.log(working)
+		}
+		decimal.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+			}
+			working.push('.')
+			last_button = '.'
+			working_display.innerHTML = working.join('')
 		}
 
 	//pushing the operator inputs into the working array
@@ -127,57 +166,128 @@
 			working = []
 			display.innerHTML = 0
 			working_display.innerHTML = 0
-			console.log(working)
+			last_button = 'clear'
 		}
 		negate.onclick = function() {
-			var operator_locations = [working.lastIndexOf(' + '), working.lastIndexOf(' - '), working.lastIndexOf(' / '), working.lastIndexOf(' * '), working.lastIndexOf(' ( '), working.lastIndexOf(' ) ')]
-			operator_locations.sort(function(a, b){return b-a})
-			working.splice(operator_locations[0]+1,0,'-')
-			working_display.innerHTML = working.join('')
-			console.log(working)
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				if (display.innerHTML.charAt(0) == '-') {
+					display.innerHTML = display.innerHTML.substr(1)
+					working = []
+					working.push(display.innerHTML)
+					working_display.innerHTML = working.join('')
+					last_button = 'negate'
+
+				} else {
+					working = []
+					working.push('-' + display.innerHTML)
+					working_display.innerHTML = working.join('')
+					last_button = 'negate'
+				}
+			} else {
+				var operator_locations = [working.lastIndexOf(' + '), working.lastIndexOf(' - '), working.lastIndexOf(' / '), working.lastIndexOf(' * '), working.lastIndexOf(' ( '), working.lastIndexOf(' ) ')]
+				if (working[operator_locations[0]+1] != '-') {
+					working.splice(operator_locations[0]+1,0,'-')
+					working_display.innerHTML = working.join('')
+	
+					last_button = 'negate'
+				} else {
+					working.splice(operator_locations[0]+1,1,'')
+					working_display.innerHTML = working.join('')
+					last_button = 'negate'
+				}
+			}
 		}
-		squared.onclick = function() {}
+		squared.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push('( ' + display.innerHTML + ' * ' + display.innerHTML + ' ) ')
+				working_display.innerHTML = working.join('')
+
+				last_button = 'squared'
+			} else if (display.innerHTML == 0 && last_button == undefined) {
+				working_display.innerHTML = 0
+			}
+			else {
+				var operator_locations = [working.lastIndexOf(' + '), working.lastIndexOf(' - '), working.lastIndexOf(' / '), working.lastIndexOf(' * '), working.lastIndexOf(' ( '), working.lastIndexOf(' ) ')]
+				last_number = working.splice(operator_locations[0]+1)
+				console.log(last_number)
+				working.push('( ' + last_number + ' * ' + last_number + ' ) ')
+				working_display.innerHTML = working.join('')
+			}
+		}
 		del.onclick = function() {
 			working.pop()
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'del'
 		}
 		divide.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(display.innerHTML)
+			}
 			working.push(' / ')
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'divide'
 		}
 		times.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(display.innerHTML)
+			}
 			working.push(' * ')
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'times'
 		}
 		minus.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(display.innerHTML)
+			}
 			working.push(' - ')
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'minus'
 		}
 		plus.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(display.innerHTML)
+			}
 			working.push(' + ')
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'plus'
 		}
-		percent.onclick = function() {}
+		percent.onclick = function() {
+			last_button = 'percent'
+		}
 		open.onclick = function() {
-			working.push(' ( ')
-			working_display.innerHTML = working.join('')
-			console.log(working)
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(' ( ' + display.innerHTML)
+				working_display.innerHTML = working.join('')
+
+				last_button = 'open'
+			} else {
+				working.push(' ( ')
+				working_display.innerHTML = working.join('')
+
+				last_button = 'open'
+			}
 		}
 		close.onclick = function() {
+			if (display.innerHTML != 0 && last_button === 'equals') {
+				working = []
+				working.push(display.innerHTML)
+			}
 			working.push(' ) ')
 			working_display.innerHTML = working.join('')
-			console.log(working)
+			last_button = 'close'
 		}
 		equals.onclick = function() {
 			working_display.innerHTML = working.join('')
 			working_display.innerHTML = working.join('')
 			var output = eval(working.join(''))
 			display.innerHTML = output
+			last_button = 'equals'
 		}
 
 		var working = []
